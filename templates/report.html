@@ -1,0 +1,110 @@
+{% extends "template.html" %}
+{% block content %}
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">{{ titlePage }}</h1>
+            </div><!-- /.col -->            
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+  <!-- /.content-header -->
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">            
+            <!-- /.card-header -->
+            <div class="card-body">
+                <table id="batchTable" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Hora</th>
+                            <th>Receita</th> 
+                            <th>Produto 1</th> 
+                            <th>Peso 1</th>   
+                            <th>Produto 2</th>   
+                            <th>Peso 2</th>   
+                            <th>Produto 3</th>   
+                            <th>Peso 3</th>   
+                            <th>Produto 4</th>   
+                            <th>Peso 4</th>   
+                            <th>Produto 5</th>   
+                            <th>Peso 5</th>   
+                            <th>Produto 6</th>   
+                            <th>Peso 6</th>   
+                            <th>Produto 7</th>   
+                            <th>Peso 7</th>   
+                            <th>Produto 8</th>   
+                            <th>Peso 8</th>   
+                            <th>Produto 9</th>   
+                            <th>Peso 9</th>   
+                            <th>Produto 10</th>   
+                            <th>Peso 10</th>   
+                            <th>Produto 11</th>   
+                            <th>Peso 11</th>   
+                            <th>Produto 12</th>   
+                            <th>Peso 12</th>   
+                            <th>Produto 13</th>   
+                            <th>Peso 13</th>   
+                            <th>Produto 14</th>   
+                            <th>Peso 14</th>   
+                            <th>Produto 15</th>   
+                            <th>Peso 15</th>   
+                            <th>Soma Dosagem 1</th>   
+                            <th>Soma Dosagem 2</th>   
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for report in reports %}
+                        <tr>                            
+                            <td>{{ report[1].strftime('%d/%m/%Y') }}</td>
+                            <td>{{ report[1].strftime('%H:%M:%S') }}</td>
+                            <td>{{ report[2] }}</td>
+                            <td>{{ report[3] }}</td>
+                            <td>{{ report[4] }}</td>  
+                            <td>{{ report[5] }}</td>
+                            <td>{{ report[6] }}</td>  
+                            <td>{{ report[7] }}</td>
+                            <td>{{ report[8] }}</td>
+                            <td>{{ report[9] }}</td>
+                            <td>{{ report[10] }}</td>
+                            <td>{{ report[11] }}</td>            
+                            <td>{{ report[12] }}</td>
+                            <td>{{ report[13] }}</td>    
+                            <td>{{ report[14] }}</td>
+                            <td>{{ report[15] }}</td>
+                            <td>{{ report[16] }}</td>
+                            <td>{{ report[17] }}</td>
+                            <td>{{ report[18] }}</td>
+                            <td>{{ report[19] }}</td>
+                            <td>{{ report[20] }}</td>
+                            <td>{{ report[21] }}</td>
+                            <td>{{ report[22] }}</td>
+                            <td>{{ report[23] }}</td>
+                            <td>{{ report[24] }}</td>
+                            <td>{{ report[25] }}</td>
+                            <td>{{ report[26] }}</td>
+                            <td>{{ report[27] }}</td>
+                            <td>{{ report[28] }}</td>
+                            <td>{{ report[29] }}</td>
+                            <td>{{ report[30] }}</td>
+                            <td>{{ report[31] }}</td>
+                            <td>{{ report[32] }}</td>
+                            <td>{{ report[33] }}</td>
+                            <td>{{ report[34] }}</td>
+                        </tr>   
+                    {% endfor %}             
+                    </tbody>
+                </table>
+            </div>        
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
