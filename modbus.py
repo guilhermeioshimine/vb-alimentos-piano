@@ -20,113 +20,112 @@ def modbus_read():
     leitura = False
     if connection:
         print("Conectou")
-        # leitura = client.read_holding_registers(9251, 1)  # Specify the unit.       16bits tenho que ler o 5 
-        # if(leitura.isError() == False):
-        #     leitura = leitura.registers
-        # else:
-        #     return
-        # print(leitura[0])
-        # if(leitura[0] != 0):
-        if (True):
+        leitura = client.read_holding_registers(8002, 1)  # Specify the unit.       16bits tenho que ler o 5 
+        if(leitura.isError() == False):
+            leitura = leitura.registers
+        else:
+            return
+        print(leitura[0])
+        if(leitura[0] != 0):
             print("Lendo Registradores")
             time.sleep(2)
 
             receita = read_string(client, 8684, 10)
             result.append(receita)
 
-            produto01 = read_string(client, 8694, 2)
+            produto01 = read_string(client, 8694, 10)
             result.append(produto01)
 
-            peso01 = read_decimal(client, 8844, 10)
+            peso01 = read_decimal(client, 8844, 2)
             result.append(peso01)
 
-            produto02 = read_string(client, 8704, 2)
+            produto02 = read_string(client, 8704, 10)
             result.append(produto02)
 
-            peso02 = read_decimal(client, 8846, 10)
+            peso02 = read_decimal(client, 8846, 2)
             result.append(peso02)
 
-            produto03 = read_string(client, 8714, 2)
+            produto03 = read_string(client, 8714, 10)
             result.append(produto03)
 
-            peso03 = read_decimal(client, 8848, 10)
+            peso03 = read_decimal(client, 8848, 2)
             result.append(peso03)
 
-            produto04 = read_string(client, 8724, 2)
+            produto04 = read_string(client, 8724, 10)
             result.append(produto04)
 
-            peso04 = read_decimal(client, 8850, 10)
+            peso04 = read_decimal(client, 8850, 2)
             result.append(peso04)
 
-            produto05 = read_string(client, 8734, 2)
+            produto05 = read_string(client, 8734, 10)
             result.append(produto05)
 
-            peso05 = read_decimal(client, 8852, 10)
+            peso05 = read_decimal(client, 8852, 2)
             result.append(peso05)
 
-            produto06 = read_string(client, 8744, 2)
+            produto06 = read_string(client, 8744, 10)
             result.append(produto06)
 
-            peso06 = read_decimal(client, 8854, 10)
+            peso06 = read_decimal(client, 8854, 2)
             result.append(peso06)
 
-            produto07 = read_string(client, 8754, 2)
+            produto07 = read_string(client, 8754, 10)
             result.append(produto07)
             
-            peso07 = read_decimal(client, 8856, 10)
+            peso07 = read_decimal(client, 8856, 2)
             result.append(peso07)
 
-            produto08 = read_string(client, 8764, 2)
+            produto08 = read_string(client, 8764, 10)
             result.append(produto08)
 
-            peso08 = read_decimal(client, 8858, 10)
+            peso08 = read_decimal(client, 8858, 2)
             result.append(peso08)
 
-            produto09 = read_string(client, 8774, 2)
+            produto09 = read_string(client, 8774, 10)
             result.append(produto09)
 
-            peso09 = read_decimal(client, 8860, 10)
+            peso09 = read_decimal(client, 8860, 2)
             result.append(peso09)
 
-            produto10 = read_string(client, 8784, 2)
+            produto10 = read_string(client, 8784, 10)
             result.append(produto10)
 
-            peso10 = read_decimal(client, 8862, 10)
+            peso10 = read_decimal(client, 8862, 2)
             result.append(peso10)
 
-            produto11 = read_string(client, 8794, 2)
+            produto11 = read_string(client, 8794, 10)
             result.append(produto11)
 
-            peso11 = read_decimal(client, 8864, 10)
+            peso11 = read_decimal(client, 8864, 2)
             result.append(peso11)
 
-            produto12 = read_string(client, 8804, 2)
+            produto12 = read_string(client, 8804, 10)
             result.append(produto12)
 
-            peso12 = read_decimal(client, 8866, 10)
+            peso12 = read_decimal(client, 8866, 2)
             result.append(peso12)
 
-            produto13 = read_string(client, 8814, 2)
+            produto13 = read_string(client, 8814, 10)
             result.append(produto13)
 
-            peso13 = read_decimal(client, 8868, 10)
+            peso13 = read_decimal(client, 8868, 2)
             result.append(peso13)
 
-            produto14 = read_string(client, 8824, 2)
+            produto14 = read_string(client, 8824, 10)
             result.append(produto14)
 
-            peso14 = read_decimal(client, 8870, 10)
+            peso14 = read_decimal(client, 8870, 2)
             result.append(peso14)
 
-            produto15 = read_string(client, 8834, 2)
+            produto15 = read_string(client, 8834, 10)
             result.append(produto15)
 
-            peso15 = read_decimal(client, 8872, 10)
+            peso15 = read_decimal(client, 8872, 2)
             result.append(peso15)
 
             
             
-            # writeInt(0, 9251, client)
+            writeInt(0, 8002, client)
     
         client.close()
         return result
