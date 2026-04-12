@@ -1,1 +1,60 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage
+.coverage
+.pytest_cache/
+htmlcov/
+
+# PyInstaller
+*.manifest
+*.spec
+
+# IDEs and editors
+.vscode/
+.idea/
+
+# Environment variables
+.env
+.env.*
+
+# Database files
+*.sqlite3
+
+# Logs
+*.log
+
+# macOS
+.DS_Store
+
+# Python bytecode compiled by other Python versions
+*.pyc
+
+# Ignore compiled JS/CSS from node builds (if any)
+node_modules/
+npm-debug.log*
+
+# Ignore local secrets/config
+instance/
 /venv

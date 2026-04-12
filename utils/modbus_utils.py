@@ -15,6 +15,19 @@ def decimalDecoder(instance):
         print("There isn't the registers, Try again.")
         return None
 
+def loteDecoder(instance):
+    if not instance.isError():
+        decoder = BinaryPayloadDecoder.fromRegisters(
+            instance.registers,
+            byteorder=Endian.Big, wordorder=Endian.Little
+        )   
+        return float('{0:.2f}'.format(decoder.decode_32bit_float()))
+
+    else:
+        # Error handling.
+        print("There isn't the registers, Try again.")
+        return None
+
 def stringDecoder(instance, length):
     if not instance.isError():
         decoder = BinaryPayloadDecoder.fromRegisters(
@@ -55,38 +68,65 @@ def writeInt(value, address, client):
         writeInt(value, address, client)
 
 def read_decimal(client, address, qtd):
-    if(client.connect()):
-        request = client.read_holding_registers(address, qtd)  # Specify the unit.
-        value = decimalDecoder(request)        
-        time.sleep(1)
-        return value
-    else:
-        read_decimal(client, address, qtd)
+    try:
+        if(client.connect()):
+            request = client.read_holding_registers(address, qtd)  # Specify the unit.
+            value = decimalDecoder(request)        
+            time.sleep(1)
+            return value
+        else:
+            read_decimal(client, address, qtd)
+    except Exception as er: 
+        data = datetime.now()
+        mensagem = str(data) + ": Erro de leitura de Decimal: " + str(er)
+        Logs.create(log=mensagem)
+
+def read_lote(client, address, qtd):
+    try:
+        if(client.connect()):
+            request = client.read_holding_registers(address, qtd, unit=1)
+            value = loteDecoder(request)        
+            time.sleep(1)
+            return int(value)
+        else:
+            read_decimal(client, address, qtd)
+    except Exception as er: 
+        print(er)
     
 def read_integer(client, address, qtd):
-    if(client.connect()):
-        request = client.read_holding_registers(address, qtd)  # Specify the unit.
-        value = request.registers
-        if(len(value) > 0):
-            time.sleep(1)
-            return value[0]
+    try:
+        if(client.connect()):
+            request = client.read_holding_registers(address, qtd)  # Specify the unit.
+            value = request.registers
+            if(len(value) > 0):
+                time.sleep(1)
+                return value[0]
+            else:
+                read_integer(client, address, qtd)
         else:
             read_integer(client, address, qtd)
-    else:
-        read_integer(client, address, qtd)
+    except Exception as er: 
+        data = datetime.now()
+        mensagem = str(data) + ": Erro de leitura de Inteiro: " + str(er)
+        Logs.create(log=mensagem)
     
 def read_string(client, address, qtd):
-    if(client.connect()):
-        request = client.read_holding_registers(address, qtd)  # Specify the unit.
-        value = stringDecoder(request, 18)
-        value = value.decode("utf-8")
-        value = stringSort(value)
-        value = value.replace("\x00", "")
-        value = value.strip()
-        time.sleep(1)
-        return value
-    else:
-        read_string(client, address, qtd)     
+    try:
+        if(client.connect()):
+            request = client.read_holding_registers(address, qtd)  # Specify the unit.
+            value = stringDecoder(request, 18)
+            value = value.decode("utf-8")
+            value = stringSort(value)
+            value = value.replace("\x00", "")
+            value = value.strip()
+            time.sleep(1)
+            return value
+        else:
+            read_string(client, address, qtd)  
+    except Exception as er: 
+        data = datetime.now()
+        mensagem = str(data) + ": Erro de leitura de String: " + str(er)
+        Logs.create(log=mensagem)   
 
 def stringSort(string):
     l = [x for x in string]
