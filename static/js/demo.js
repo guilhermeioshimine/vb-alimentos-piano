@@ -27,6 +27,7 @@
             'csv', 'excel', 'pdf', 'print'
         ]    
   });
+  // Note: `#dosagemTable` is initialized per-page in report_dosagens.html
   
    
       

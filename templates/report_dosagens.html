@@ -1,0 +1,86 @@
+{% extends "template.html" %}
+{% block content %}
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">{{ titlePage }}</h1>
+            </div><!-- /.col -->            
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+  <!-- /.content-header -->
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">            
+            <!-- /.card-header -->
+            <div class="card-body">
+                <table id="dosagemTable" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                           <th>Data</th>
+                            <th>Hora</th>
+                            <th>Receita</th>
+                            <th>Sequência</th>
+                            <th>Código</th>
+                            <th>Produto</th>
+                            <th>Lote</th>
+                            <th>Unidade</th>
+                            <th>Peso</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for report in reports %}
+                        <tr>
+                            <td>{{ report[1].strftime('%d/%m/%Y') if report[1] is not string else report[1] }}</td>
+                            <td>{{ report[1].strftime('%H:%M:%S') if report[1] is not string else '' }}</td>
+                            <td>{{ report[2] }}</td>
+                            <td>{{ report[3] }}</td>
+                            <td>{{ report[4] }}</td>
+                            <td>{{ report[5] }}</td>
+                            <td>{{ report[6] }}</td>
+                            <td>{{ report[7] }}</td>
+                            <td>{{ report[8] }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>        
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+{% block page_scripts %}
+<script>
+    $(function() {
+        // Initialize DataTable with search and export buttons
+        var table = $('#dosagemTable').DataTable({
+            responsive: false,
+            autoWidth: true,
+            scrollX: true,
+            language: {
+                url: '../static/js/datatable.json'
+            },
+            dom: 'Bfrtip',
+            buttons: [ 'csv', 'excel', 'pdf', 'print' ]
+        });
+
+        // Move buttons into the card header container
+        table.buttons().container().appendTo($('#dosagemButtons'));
+
+        // Move the default search input into the header search container
+        var filter = $('#dosagemTable_filter');
+        filter.find('label').contents().filter(function() { return this.nodeType === 3; }).remove();
+        $('#dosagemSearch').append(filter);
+        // Adjust styling
+        $('#dosagemSearch input').addClass('form-control form-control-sm').css('display', 'inline-block').css('width', '200px');
+    });
+</script>
+{% endblock %}

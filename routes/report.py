@@ -1,4 +1,6 @@
 from flask import Blueprint, render_template, redirect, request
+import sqlite3
+from datetime import datetime
 from models.models import *
 
 report_bp = Blueprint('report', __name__)
@@ -17,5 +19,28 @@ def list_relatorio():
     print(reportList)
     try:
         return render_template('report.html', titlePage='Dosagem - Piano', reports=reportList)
+    except Exception as er:
+        print(er)
+
+
+@report_bp.route('/report_dosagens')
+def list_dosagens():
+    conn = sqlite3.connect('dosagem.db')
+    cur = conn.cursor()
+    cur.execute("SELECT id, receita, sequencia, codigo, produto, lote, unidade, peso, timestamp FROM dosagens ORDER BY timestamp DESC LIMIT 1000")
+    rows = cur.fetchall()
+    reportList = []
+    for row in rows:
+        # row: id, receita, sequencia, codigo, produto, lote, unidade, peso, timestamp
+        ts = row[8]
+        try:
+            ts_dt = datetime.fromisoformat(ts)
+        except Exception:
+            ts_dt = ts
+        item = [row[0], ts_dt, row[1], row[2], row[3], row[4], row[5], row[6], row[7]]
+        reportList.append(item)
+    conn.close()
+    try:
+        return render_template('report_dosagens.html', titlePage='Dosagem Piano-PI', reports=reportList)
     except Exception as er:
         print(er)
