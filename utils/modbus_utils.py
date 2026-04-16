@@ -1,6 +1,7 @@
 from pymodbus.constants import Endian
 from pymodbus.payload import *
 import time
+from datetime import datetime
 
 def decimalDecoder(instance):
     if not instance.isError():

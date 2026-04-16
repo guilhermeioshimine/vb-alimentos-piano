@@ -41,6 +41,7 @@ htmlcov/
 
 # Database files
 *.sqlite3
+*.db
 
 # Logs
 *.log
