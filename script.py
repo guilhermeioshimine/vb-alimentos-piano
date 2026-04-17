@@ -257,7 +257,6 @@ def main():
 
 	try:
 		while True:
-			print("Verificando bit de disparo...")
 			bit = read_bit(client, BIT_TRIGGER_REGISTRADOR, BIT_TRIGGER_POSICAO)
 			if bit == 1:
 				print("Bit de disparo detectado!")

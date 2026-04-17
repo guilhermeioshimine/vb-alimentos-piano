@@ -11,7 +11,6 @@ def modbus_read():
     result = []
     leitura = False
     if connection:
-        print("Conectou")
         leitura = client.read_holding_registers(8002, 1)  # Specify the unit.       16bits tenho que ler o 5 
         if(leitura.isError() == False):
             leitura = leitura.registers
@@ -160,6 +159,9 @@ def modbus_read():
             lote15 = read_lote(client, 28618, 2)
             result.append(lote15)
 
+            sequencia = read_word(client, 8874)
+            result.append(sequencia)
+
             writeInt(0, 8002, client)
     
         client.close()
@@ -221,6 +223,7 @@ while True:
                 product15   = x[43],
                 weight15    = x[44],
                 allotment15 = x[45],
+                sequencia   = x[46],
                 sum1        = x[2] + x[5] + x[8] + x[11] + x[14] + x[17] + x[20] + x[23] + x[26] + x[29] + x[32],
                 sum2        = x[35] + x[38] + x[41] + x[44]
             )   

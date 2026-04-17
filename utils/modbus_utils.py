@@ -110,6 +110,24 @@ def read_integer(client, address, qtd):
         data = datetime.now()
         mensagem = str(data) + ": Erro de leitura de Inteiro: " + str(er)
         Logs.create(log=mensagem)
+
+def read_word(client, address):
+    try:
+        if(client.connect()):
+            request = client.read_holding_registers(address, 1)  # Specify the unit.
+            if not request.isError():
+                value = request.registers[0]
+                time.sleep(1)
+                return value
+            else:
+                print("Erro: registrador não disponível.")
+                return None
+        else:
+            return read_word(client, address)
+    except Exception as er: 
+        data = datetime.now()
+        mensagem = str(data) + ": Erro de leitura de Word: " + str(er)
+        Logs.create(log=mensagem)
     
 def read_string(client, address, qtd):
     try:

@@ -54,6 +54,7 @@ class Report(BaseModel):
     product15        = CharField()
     weight15         = DecimalField()
     allotment15      = DecimalField() 
+    sequencia        = IntegerField()
     sum1             = DecimalField()
     sum2             = DecimalField()
     

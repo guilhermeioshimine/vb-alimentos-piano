@@ -23,7 +23,8 @@
                         <tr>
                            <th>Data</th>
                             <th>Hora</th>
-                            <th>Receita</th> 
+                            <th>Receita</th>
+                            <th>Sequencia</th> 
                             <th>Produto 1</th> 
                             <th>Peso 1</th>   
                             <th>lote 1</th>   
@@ -124,8 +125,9 @@
                             <td>{{ report[45] }}</td>
                             <td>{{ report[46] }}</td>
                             <td>{{ report[47] }}</td>
-                            <td>{{ report[48] }}</td>
-                            <td>{{ report[49] }}</td>                           
+                            <td>{{ "%.2f"|format(report[48]) }}</td>
+                            <td>{{ "%.2f"|format(report[49]) }}</td>
+                            <td>{{ "%.2f"|format(report[50]) }}</td>                           
                         </tr>   
                     {% endfor %}             
                     </tbody>
